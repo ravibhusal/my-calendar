@@ -10,14 +10,8 @@ dayjs.extend(customParseFormat);
 
 function Calendar(props: any){
 
-  
-  const currentDay = props.currentDate.format('D');
-  const currentMonth = props.currentDate.format('MM');
-  const currentYear = props.currentDate.format('YYYY');
-
   const [selectedDay, setDay] = useState(props.selectedDate.format('D'));
   const [selectedMonth, setMonth] = useState(props.selectedDate.format('M'));
-  const selectedMonthAbbr = dayjs().month(parseInt(selectedMonth) - 1).format('MMM');
   const [selectedYear, setYear] = useState(props.selectedDate.format('YYYY'));
 
   const [totalDaysInAMonth, setTotalDaysInAMonth] = useState(props.selectedDate.daysInMonth());
@@ -28,6 +22,8 @@ function Calendar(props: any){
   const[showDates, toggleShowDates] = useState<Boolean>(true)
 
   const isFirstRender = useRef<Boolean>(true)
+
+  const selectedMonthAbbr = dayjs().month(parseInt(selectedMonth) - 1).format('MMM');
 
 
   useEffect(() =>{
@@ -115,7 +111,7 @@ function Calendar(props: any){
           </button>
       </div>
 
-      {showDates && <DateSelect currentDate = {props.currentDate} selectedMonth={selectedMonth} selectedYear={selectedYear} totalDaysInAMonth={totalDaysInAMonth} firstDayOfTheMonth={firstDayOfTheMonth} selectedDate = {props.selectedDate} onDateSelect={onDateSelect}/>}
+      {showDates && <DateSelect currentDate = {props.currentDate} selectedDay={selectedDay} selectedMonth={selectedMonth} selectedYear={selectedYear} totalDaysInAMonth={totalDaysInAMonth} firstDayOfTheMonth={firstDayOfTheMonth} selectedDate = {props.selectedDate} onDateSelect={onDateSelect}/>}
       {showMonths && <MonthSelect currentDate = {props.currentDate} selectedMonth={selectedMonth} selectedDate = {props.selectedDate} onMonthSelect= {onMonthSelect}/>}
       {showYears && <YearSelect currentDate = {props.currentDate} selectedYear={selectedYear} selectedDate = {props.selectedDate} onYearSelect={onYearSelect}/>}
     </div>

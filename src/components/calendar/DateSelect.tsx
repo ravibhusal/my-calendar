@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import dayjs from 'dayjs'
 
 function DateSelect(props: any){
@@ -6,7 +6,6 @@ function DateSelect(props: any){
   const weekdaysShortName: Array<String> = ['Sun','Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
   const currentDate = props.currentDate.format('YYYY/M/D');
-  const [selectedDay, setDay] = useState(props.selectedDate.format('D'));
 
   const onDateSelect = (event: any) => {
     let day = event.currentTarget.dataset.date;
@@ -25,7 +24,7 @@ function DateSelect(props: any){
     var daysInTheMonth = [];
     
     for(let i = 1; i <= props.totalDaysInAMonth; i++){
-      var classToAdd: string = i === parseInt(selectedDay) ? "bg-red-500": "hover:bg-red-200"
+      var classToAdd: string = i === parseInt(props.selectedDay) ? "bg-red-500": "hover:bg-red-200"
       var formattedDate = dayjs(`${props.selectedYear}/${props.selectedMonth}/${i}}`).format('YYYY/M/D');
       classToAdd +=  formattedDate === currentDate ? " text-red-300 " : "";
       
