@@ -1,21 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
 import YearSelect from './YearSelect';
 import MonthSelect from './MonthSelect';
-import dayjs from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import DateSelect from './DateSelect';
 
 dayjs.extend(customParseFormat);
 
+interface CalendaProps{
+  currentDate: Dayjs;
+  selectedDate: Dayjs;
+  onDateSelect: (selectedDay: string, selectedMonth: string, selectedYear: string) => void;
+}
 
-function Calendar(props: any){
+function Calendar(props: CalendaProps){
 
-  const [selectedDay, setDay] = useState(props.selectedDate.format('D'));
-  const [selectedMonth, setMonth] = useState(props.selectedDate.format('M'));
-  const [selectedYear, setYear] = useState(props.selectedDate.format('YYYY'));
+  const currentYear = props.currentDate.format('YYYY');
+  const [selectedDay, setDay] = useState<string>(props.selectedDate.format('D'));
+  const [selectedMonth, setMonth] = useState<string>(props.selectedDate.format('M'));
+  const [selectedYear, setYear] = useState<string>(props.selectedDate.format('YYYY'));
 
-  const [totalDaysInAMonth, setTotalDaysInAMonth] = useState(props.selectedDate.daysInMonth());
-  const [firstDayOfTheMonth, setfirstDayOfTheMonth] = useState(props.selectedDate.startOf('month'));
+  const [totalDaysInAMonth, setTotalDaysInAMonth] = useState<number>(props.selectedDate.daysInMonth());
+  const [firstDayOfTheMonth, setfirstDayOfTheMonth] = useState<Dayjs>(props.selectedDate.startOf('month'));
 
   const[showYears, toggleShowYears] = useState<Boolean>(false)
   const[showMonths, toggleShowMonths] = useState<Boolean>(false)
@@ -23,7 +29,7 @@ function Calendar(props: any){
 
   const isFirstRender = useRef<Boolean>(true)
 
-  const selectedMonthAbbr = dayjs().month(parseInt(selectedMonth) - 1).format('MMM');
+  const selectedMonthAbbr: string = dayjs().month(parseInt(selectedMonth) - 1).format('MMM');
 
 
   useEffect(() =>{
@@ -82,18 +88,18 @@ function Calendar(props: any){
   }, [])
 
 
-  const onDateSelect = (day: any) =>{
-    setDay(day.toString())
+  const onDateSelect = (day: string): void => {
+    setDay(day)
   }
 
-  const onMonthSelect = (month: any) => {
-    setMonth(month.toString());
+  const onMonthSelect = (month: string): void => {
+    setMonth(month);
     toggleShowMonths(false)
     toggleShowDates(true)
   }
 
-  const onYearSelect = (year: any) => {
-    setYear(year.toString())
+  const onYearSelect = (year: string): void => {
+    setYear(year)
     toggleShowDates(true)
   }  
 
@@ -111,9 +117,9 @@ function Calendar(props: any){
           </button>
       </div>
 
-      {showDates && <DateSelect currentDate = {props.currentDate} selectedDay={selectedDay} selectedMonth={selectedMonth} selectedYear={selectedYear} totalDaysInAMonth={totalDaysInAMonth} firstDayOfTheMonth={firstDayOfTheMonth} selectedDate = {props.selectedDate} onDateSelect={onDateSelect}/>}
-      {showMonths && <MonthSelect currentDate = {props.currentDate} selectedMonth={selectedMonth} selectedDate = {props.selectedDate} onMonthSelect= {onMonthSelect}/>}
-      {showYears && <YearSelect currentDate = {props.currentDate} selectedYear={selectedYear} selectedDate = {props.selectedDate} onYearSelect={onYearSelect}/>}
+      {showDates && <DateSelect currentDate = {props.currentDate} selectedDay={selectedDay} selectedMonth={selectedMonth} selectedYear={selectedYear} totalDaysInAMonth={totalDaysInAMonth} firstDayOfTheMonth={firstDayOfTheMonth} onDateSelect={onDateSelect}/>}
+      {showMonths && <MonthSelect selectedMonth={selectedMonth} onMonthSelect= {onMonthSelect}/>}
+      {showYears && <YearSelect currentYear = {currentYear} selectedYear={selectedYear} onYearSelect={onYearSelect}/>}
     </div>
   );
 }

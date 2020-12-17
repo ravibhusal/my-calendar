@@ -1,18 +1,23 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-function MonthSelect(props: any){
+interface MonthSelectProps{
+  selectedMonth: string;
+  onMonthSelect: (month: string) => void
+}
+
+function MonthSelect(props: MonthSelectProps){
 
   const months: Array<String> = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
   "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 
-  const onMonthSelect = (event: any) => {
-    let month = event.currentTarget.dataset.month;
+  const onMonthSelect = (event: React.MouseEvent<HTMLElement>): void=> {
+    let month: string|any = event.currentTarget.getAttribute('data-month');
     props.onMonthSelect(month);
   }
 
-  let monthList = months.map((month, index) => {
-    var classesToAdd = index + 1 == props.selectedMonth ? "bg-red-500" : "hover:bg-red-200"
+  let monthList: Array<any> = months.map((month, index) => {
+    var classesToAdd: string = index + 1 === parseInt(props.selectedMonth) ? "bg-red-500" : "hover:bg-red-200"
     return <td data-month= {index + 1} className={` rounded-full w-1/3 ${classesToAdd}`} onClick={ e =>{
       onMonthSelect(e)
     }}>{month}</td>;
@@ -35,10 +40,10 @@ function MonthSelect(props: any){
       }
     });
 
-    let elements: any = []
+    let elements: Array<any> = []
 
-    rows.map((d: any, i: any) => {
-      elements.push(<tr>{d}</tr>);
+    elements = rows.map((d: any, i: any) => {
+      return <tr>{d}</tr>;
     });
     return elements;
   }

@@ -1,29 +1,40 @@
 import React from 'react'
-import dayjs from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 
-function DateSelect(props: any){
+
+
+interface DateSelectProps{
+  currentDate: Dayjs;
+  selectedDay: string;
+  selectedMonth: string;
+  selectedYear: string;
+  totalDaysInAMonth: number;
+  firstDayOfTheMonth: any;
+  onDateSelect: (day: string) => void
+}
+function DateSelect(props: DateSelectProps){
 
   const weekdaysShortName: Array<String> = ['Sun','Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
-  const currentDate = props.currentDate.format('YYYY/M/D');
+  const currentDate: string = props.currentDate.format('YYYY/M/D');
 
-  const onDateSelect = (event: any) => {
-    let day = event.currentTarget.dataset.date;
+  const onDateSelect = (event: React.MouseEvent<HTMLElement>): void => {
+    var day: string|any = event.currentTarget.getAttribute('data-date');
     props.onDateSelect(day);
   }
 
   const renderWeekNames = () =>{
-    let weekNames: any = [];
-    weekdaysShortName.map(day => {
-      weekNames.push(<th className="w-1/7 p-1">{day}</th>)
+    var weekNames: Array<any> = [];
+    weekNames = weekdaysShortName.map(day => {
+      return <th className="w-1/7 p-1">{day}</th>;
     })
     return weekNames;
   }
 
   const renderDates = () =>{
-    var daysInTheMonth = [];
+    var daysInTheMonth: Array<any> = [];
     
-    for(let i = 1; i <= props.totalDaysInAMonth; i++){
+    for(let i: number = 1; i <= props.totalDaysInAMonth; i++){
       var classToAdd: string = i === parseInt(props.selectedDay) ? "bg-red-500": "hover:bg-red-200"
       var formattedDate = dayjs(`${props.selectedYear}/${props.selectedMonth}/${i}}`).format('YYYY/M/D');
       classToAdd +=  formattedDate === currentDate ? " text-red-300 " : "";
@@ -33,13 +44,13 @@ function DateSelect(props: any){
       }}>{i}</td>)
     }
 
-    var blankDays = [];
+    var blankDays: Array<any> = [];
 
-    for (let i = 0; i < parseInt(props.firstDayOfTheMonth.$W); i++) {
+    for (let i: number = 0; i < parseInt(props.firstDayOfTheMonth.$W); i++) {
       blankDays.push(<td>{""}</td>);
     }
 
-    var totalSlots = [...blankDays, ...daysInTheMonth];
+    var totalSlots: Array<any> = [...blankDays, ...daysInTheMonth];
     var cells: Array<any> = [];
     var rows: Array<any> = [];
 
@@ -56,10 +67,10 @@ function DateSelect(props: any){
       }
     });
 
-    let elements: any = []
+    let elements: Array<any> = []
 
-    rows.map((d: any, i: any) => {
-      elements.push(<tr>{d}</tr>);
+    elements = rows.map((d: any) => {
+      return <tr>{d}</tr>;
     });
     return elements;
   }

@@ -8,15 +8,14 @@ dayjs.extend(customParseFormat)
 
 function DatePicker(){
 
-  const [showCalendar, toggleShowCalendar] = useState(false)
+  const [showCalendar, toggleShowCalendar] = useState<Boolean>(false)
 
   const currentDate = dayjs();
   const [selectedDate, setSelectedDate] = useState(currentDate)
 
-  const onDateSelect = (day: any, month: any, year: any) =>{
+  const onDateSelect = (day: string, month: string, year: string) =>{
     setSelectedDate(dayjs(`${year}-${month}-${day}`, "YYYY/M/D"))
     toggleShowCalendar(!showCalendar)
-    console.log(day, month, year, selectedDate);
   }
   return (
     <div>

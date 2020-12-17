@@ -1,23 +1,26 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-function YearSelect(props: any){
+interface YearSelectProps{
+  currentYear: string;
+  selectedYear: string;
+  onYearSelect: (year: string) => void
+}
+function YearSelect(props: YearSelectProps){
 
-  const currentYear = props.currentDate.format('YYYY');
-
-  const onYearSelect = (event: any) =>{
-    let year = event.currentTarget.dataset.year;
+  const onYearSelect = (event: React.MouseEvent<HTMLElement>): void =>{
+    let year: string|any = event.currentTarget.getAttribute("data-year");
     props.onYearSelect(year);
   }
 
   let yearList: any = [];
-  for ( var i = parseInt(currentYear) - 20; i <= parseInt(currentYear) + 20; i ++ ){
+  for ( var i = parseInt(props.currentYear) - 20; i <= parseInt(props.currentYear) + 20; i ++ ){
     var classesToAdd = i === parseInt(props.selectedYear) ? 'bg-red-500' : "hover:bg-red-200"
     yearList.push(<td key={i} data-year={i} className={` rounded-full w-1/3 ${classesToAdd}`} onClick={ e =>{
       onYearSelect(e)
     }}>{i}</td>)
   }
 
-  const renderMonths = () => {
+  const renderYears = () => {
     var cells: Array<any> = [];
     var rows: Array<any> = [];
 
@@ -34,10 +37,10 @@ function YearSelect(props: any){
       }
     });
 
-    let elements: any = []
+    let elements: Array<any> = []
 
-    rows.map((d: any, i: any) => {
-      elements.push(<tr className="w-full">{d}</tr>);
+    elements = rows.map((d: any, i: any) => {
+      return <tr className="w-full">{d}</tr>;
     });
     return elements;
   }
@@ -49,7 +52,7 @@ function YearSelect(props: any){
         <th>Year</th>
         <th></th>
       </thead>
-      <tbody>{renderMonths()}</tbody>
+      <tbody>{renderYears()}</tbody>
     </table>
   );
 }
