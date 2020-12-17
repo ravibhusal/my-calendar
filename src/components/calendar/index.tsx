@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import YearSelect from './YearSelect';
 import MonthSelect from './MonthSelect';
+import DateSelect from './DateSelect';
+
+import useEffectUpdate from '../../custom_hooks/UseEffectUpdate'
+
 import dayjs, { Dayjs } from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
-import DateSelect from './DateSelect';
 
 dayjs.extend(customParseFormat);
 
@@ -28,8 +31,6 @@ function Calendar(props: CalendaProps){
   const[showDates, toggleShowDates] = useState<Boolean>(true)
   
   const[newDateSelected, toggleNewDateSelected] = useState<Boolean>(false)
-
-  const isFirstRender = useRef<Boolean>(true)
 
   const selectedMonthAbbr: string = dayjs().month(parseInt(selectedMonth) - 1).format('MMM');
 
@@ -64,31 +65,20 @@ function Calendar(props: CalendaProps){
   }, [showDates])
 
 
-  useEffect(() => {
-    if(!isFirstRender.current){
-      props.onDateSelect(selectedDay, selectedMonth, selectedYear)
-    }
+  useEffectUpdate(() => {
+    props.onDateSelect(selectedDay, selectedMonth, selectedYear);
   }, [newDateSelected]);
 
-  useEffect(() => {
-    if(!isFirstRender.current){
-      console.log(totalDaysInAMonth)
-      setTotalDaysInAMonth(dayjs(`${selectedYear}-${selectedMonth}-${selectedDay}`).daysInMonth());
-      setfirstDayOfTheMonth(dayjs(`${selectedYear}-${selectedMonth}-${selectedDay}`).startOf('month'));
-    }
+  useEffectUpdate(() => {
+    console.log(totalDaysInAMonth)
+    setTotalDaysInAMonth(dayjs(`${selectedYear}-${selectedMonth}-${selectedDay}`).daysInMonth());
+    setfirstDayOfTheMonth(dayjs(`${selectedYear}-${selectedMonth}-${selectedDay}`).startOf('month'));
   }, [selectedYear]);
 
-  useEffect(() => {
-    if(!isFirstRender.current){
-      setTotalDaysInAMonth(dayjs(`${selectedYear}-${selectedMonth}-${selectedDay}`).daysInMonth());
-      setfirstDayOfTheMonth(dayjs(`${selectedYear}-${selectedMonth}-${selectedDay}`).startOf('month'));
-    }
+  useEffectUpdate(() => {
+    setTotalDaysInAMonth(dayjs(`${selectedYear}-${selectedMonth}-${selectedDay}`).daysInMonth());
+    setfirstDayOfTheMonth(dayjs(`${selectedYear}-${selectedMonth}-${selectedDay}`).startOf('month'));
   }, [selectedMonth]);
-
-  useEffect(() => { 
-    isFirstRender.current = false
-  }, [])
-
 
   const onDateSelect = (day: string): void => {
     setDay(day)

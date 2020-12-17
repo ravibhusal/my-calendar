@@ -1,5 +1,5 @@
 import React from 'react';
-
+import helpers from '../../helpers/helpers';
 interface MonthSelectProps{
   selectedMonth: string;
   onMonthSelect: (month: string) => void
@@ -24,28 +24,7 @@ function MonthSelect(props: MonthSelectProps){
   })
 
   const renderMonths = () => {
-    var cells: Array<any> = [];
-    var rows: Array<any> = [];
-
-    monthList.forEach((row, i) => {
-      if (i % 3 !== 0) {
-        cells.push(row);
-      } else {
-        rows.push(cells);
-        cells = [];
-        cells.push(row);
-      }
-      if (i === monthList.length - 1) {
-        rows.push(cells);
-      }
-    });
-
-    let elements: Array<any> = []
-
-    elements = rows.map((d: any, i: any) => {
-      return <tr>{d}</tr>;
-    });
-    return elements;
+    return helpers.formatElementsForTable(monthList, 3);
   }
 
   return(

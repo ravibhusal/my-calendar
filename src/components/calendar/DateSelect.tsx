@@ -1,5 +1,6 @@
 import React from 'react'
 import dayjs, { Dayjs } from 'dayjs'
+import helpers from '../../helpers/helpers'
 
 
 
@@ -55,28 +56,28 @@ function DateSelect(props: DateSelectProps){
     }
 
     var totalSlots: Array<any> = [...blankDays, ...daysInTheMonth];
-    var cells: Array<any> = [];
-    var rows: Array<any> = [];
+    // var cells: Array<any> = [];
+    // var rows: Array<any> = [];
 
-    totalSlots.forEach((row, i) => {
-      if (i % 7 !== 0) {
-        cells.push(row);
-      } else {
-        rows.push(cells);
-        cells = [];
-        cells.push(row);
-      }
-      if (i === totalSlots.length - 1) {
-        rows.push(cells);
-      }
-    });
+    // totalSlots.forEach((row, i) => {
+    //   if (i % 7 !== 0) {
+    //     cells.push(row);
+    //   } else {
+    //     rows.push(cells);
+    //     cells = [];
+    //     cells.push(row);
+    //   }
+    //   if (i === totalSlots.length - 1) {
+    //     rows.push(cells);
+    //   }
+    // });
 
-    let elements: Array<any> = []
+    // let elements: Array<any> = []
 
-    elements = rows.map((d: any) => {
-      return <tr>{d}</tr>;
-    });
-    return elements;
+    // elements = rows.map((d: any) => {
+    //   return <tr>{d}</tr>;
+    // });
+    return helpers.formatElementsForTable(totalSlots, 7);
   }
 
   return(

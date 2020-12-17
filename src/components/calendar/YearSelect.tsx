@@ -1,4 +1,5 @@
 import React from 'react';
+import helpers from '../../helpers/helpers';
 
 interface YearSelectProps{
   currentYear: string;
@@ -21,28 +22,7 @@ function YearSelect(props: YearSelectProps){
   }
 
   const renderYears = () => {
-    var cells: Array<any> = [];
-    var rows: Array<any> = [];
-
-    yearList.forEach((row: any, i: any) => {
-      if (i % 3 !== 0) {
-        cells.push(row);
-      } else {
-        rows.push(cells);
-        cells = [];
-        cells.push(row);
-      }
-      if (i === yearList.length - 1) {
-        rows.push(cells);
-      }
-    });
-
-    let elements: Array<any> = []
-
-    elements = rows.map((d: any, i: any) => {
-      return <tr className="w-full">{d}</tr>;
-    });
-    return elements;
+    return helpers.formatElementsForTable(yearList, 3);
   }
 
   return(
