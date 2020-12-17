@@ -19,7 +19,7 @@ function DatePicker(){
   }
   return (
     <div className="w-64">
-      <input name="date" className = "bg-red-200 w-full" autoComplete="off" value={selectedDate.format("YYYY/M/D")} onClick = { e => {
+      <input name="date" className = "bg-red-200 h-8 rounded-lg p-2 w-full" autoComplete="off" value={selectedDate.format("YYYY/M/D")} onClick = { e => {
         toggleShowCalendar(!showCalendar)
       }} />
       {showCalendar && <Calendar currentDate={currentDate} selectedDate={selectedDate} onDateSelect = {onDateSelect}/>}

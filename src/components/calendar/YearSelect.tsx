@@ -10,7 +10,7 @@ function YearSelect(props: YearSelectProps){
 
   const selectedYearRef = useRef<any>();
 
-  const scrollToBottom = () => {
+  const scrollToBottom = () :void => {
     selectedYearRef.current.scrollIntoView({
       behavior: "smooth"
     });
