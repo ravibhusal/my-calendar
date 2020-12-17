@@ -6,7 +6,7 @@ interface YearSelectProps{
   selectedYear: string;
   onYearSelect: (year: string) => void
 }
-function YearSelect(props: YearSelectProps){
+function YearSelect(props: YearSelectProps): JSX.Element{
 
   const selectedYearRef = useRef<any>();
 

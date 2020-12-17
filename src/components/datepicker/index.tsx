@@ -6,7 +6,7 @@ import customParseFormat from 'dayjs/plugin/customParseFormat'
 
 dayjs.extend(customParseFormat)
 
-function DatePicker(){
+function DatePicker(): JSX.Element{
 
   const [showCalendar, toggleShowCalendar] = useState<Boolean>(false)
 

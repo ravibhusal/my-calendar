@@ -16,7 +16,7 @@ interface CalendaProps{
   onDateSelect: (selectedDay: string, selectedMonth: string, selectedYear: string) => void;
 }
 
-function Calendar(props: CalendaProps){
+function Calendar(props: CalendaProps): JSX.Element{
 
   const currentYear = props.currentDate.format('YYYY');
   const [selectedDay, setDay] = useState<string>(props.selectedDate.format('D'));

@@ -14,7 +14,7 @@ interface DateSelectProps{
   firstDayOfTheMonth: any;
   onDateSelect: (day: string) => void
 }
-function DateSelect(props: DateSelectProps){
+function DateSelect(props: DateSelectProps): JSX.Element{
 
   const weekdaysShortName: Array<String> = ['Sun','Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 

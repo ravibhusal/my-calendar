@@ -4,7 +4,7 @@ import DatePicker from './components/datepicker'
 function App() {
   
   return (
-    <div className="flex container justify-center">
+    <div className="flex container mt-10 justify-center">
       <DatePicker/>
     </div>
   );

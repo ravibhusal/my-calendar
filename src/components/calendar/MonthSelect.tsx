@@ -5,7 +5,7 @@ interface MonthSelectProps{
   onMonthSelect: (month: string) => void
 }
 
-function MonthSelect(props: MonthSelectProps){
+function MonthSelect(props: MonthSelectProps): JSX.Element{
 
   const months: Array<String> = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
   "Aug", "Sep", "Oct", "Nov", "Dec"]
