@@ -26,6 +26,8 @@ function Calendar(props: CalendaProps){
   const[showYears, toggleShowYears] = useState<Boolean>(false)
   const[showMonths, toggleShowMonths] = useState<Boolean>(false)
   const[showDates, toggleShowDates] = useState<Boolean>(true)
+  
+  const[newDateSelected, toggleNewDateSelected] = useState<Boolean>(false)
 
   const isFirstRender = useRef<Boolean>(true)
 
@@ -66,7 +68,7 @@ function Calendar(props: CalendaProps){
     if(!isFirstRender.current){
       props.onDateSelect(selectedDay, selectedMonth, selectedYear)
     }
-  }, [selectedDay]);
+  }, [newDateSelected]);
 
   useEffect(() => {
     if(!isFirstRender.current){
@@ -90,6 +92,7 @@ function Calendar(props: CalendaProps){
 
   const onDateSelect = (day: string): void => {
     setDay(day)
+    toggleNewDateSelected(true);
   }
 
   const onMonthSelect = (month: string): void => {
@@ -117,7 +120,7 @@ function Calendar(props: CalendaProps){
           </button>
       </div>
 
-      {showDates && <DateSelect currentDate = {props.currentDate} selectedDay={selectedDay} selectedMonth={selectedMonth} selectedYear={selectedYear} totalDaysInAMonth={totalDaysInAMonth} firstDayOfTheMonth={firstDayOfTheMonth} onDateSelect={onDateSelect}/>}
+      {showDates && <DateSelect currentDate = {props.currentDate} selectedDate={props.selectedDate} selectedDay={selectedDay} selectedMonth={selectedMonth} selectedYear={selectedYear} totalDaysInAMonth={totalDaysInAMonth} firstDayOfTheMonth={firstDayOfTheMonth} onDateSelect={onDateSelect}/>}
       {showMonths && <MonthSelect selectedMonth={selectedMonth} onMonthSelect= {onMonthSelect}/>}
       {showYears && <YearSelect currentYear = {currentYear} selectedYear={selectedYear} onYearSelect={onYearSelect}/>}
     </div>

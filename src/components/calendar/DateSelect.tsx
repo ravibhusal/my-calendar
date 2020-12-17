@@ -5,6 +5,7 @@ import dayjs, { Dayjs } from 'dayjs'
 
 interface DateSelectProps{
   currentDate: Dayjs;
+  selectedDate: Dayjs;
   selectedDay: string;
   selectedMonth: string;
   selectedYear: string;
@@ -17,6 +18,7 @@ function DateSelect(props: DateSelectProps){
   const weekdaysShortName: Array<String> = ['Sun','Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
   const currentDate: string = props.currentDate.format('YYYY/M/D');
+  const selectedDate: string = props.selectedDate.format('YYYY/M/D');
 
   const onDateSelect = (event: React.MouseEvent<HTMLElement>): void => {
     var day: string|any = event.currentTarget.getAttribute('data-date');
@@ -35,9 +37,11 @@ function DateSelect(props: DateSelectProps){
     var daysInTheMonth: Array<any> = [];
     
     for(let i: number = 1; i <= props.totalDaysInAMonth; i++){
-      var classToAdd: string = i === parseInt(props.selectedDay) ? "bg-red-500": "hover:bg-red-200"
-      var formattedDate = dayjs(`${props.selectedYear}/${props.selectedMonth}/${i}}`).format('YYYY/M/D');
-      classToAdd +=  formattedDate === currentDate ? " text-red-300 " : "";
+      var classToAdd: string = i === parseInt(props.selectedDay) ? "": "hover:bg-red-200"
+      var formattedDate: string = dayjs(`${props.selectedYear}/${props.selectedMonth}/${i}}`).format('YYYY/M/D');
+
+      classToAdd += formattedDate === currentDate ? " text-red-300 " : "";
+      classToAdd += formattedDate == selectedDate ? "bg-red-500" : ""
       
       daysInTheMonth.push(<td key={i} data-date={i} data-month={props.selectedMonth} data-year={props.selectedYear} className={` rounded-full ${classToAdd}`} onClick = {e => {
         {onDateSelect(e)}
