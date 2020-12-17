@@ -1,5 +1,5 @@
 {
-  "homepage": "http://ravibhusal.github.io/my-calendar",
+  "homepage": "http://ravibhusal.github.io/",
   "name": "my-calendar",
   "version": "0.1.0",
   "private": true,
@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "predeploy": "npm run build",
+    "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
     "build": "craco build",
     "test": "craco test",
