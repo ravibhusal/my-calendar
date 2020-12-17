@@ -11,7 +11,7 @@ interface DateSelectProps{
   selectedMonth: string;
   selectedYear: string;
   totalDaysInAMonth: number;
-  firstDayOfTheMonth: any;
+  firstDayOfTheMonth: any; // See line: 55
   onDateSelect: (day: string) => void
 }
 function DateSelect(props: DateSelectProps): JSX.Element{
@@ -51,6 +51,8 @@ function DateSelect(props: DateSelectProps): JSX.Element{
 
     var blankDays: Array<any> = [];
 
+    // TODO: Find the correct api for the first day of the month in dayjs library and fix
+    // firstDayOfTheMonth.$W. startOf('month').format("W") apparently doesn't work.
     for (let i: number = 0; i < parseInt(props.firstDayOfTheMonth.$W); i++) {
       blankDays.push(<td className="w-1/6 p-1">{" "}</td>);
     }
