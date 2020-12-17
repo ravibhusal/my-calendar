@@ -44,7 +44,7 @@ function DateSelect(props: DateSelectProps){
       classToAdd += formattedDate === currentDate ? " text-red-300 " : "";
       classToAdd += formattedDate == selectedDate ? "bg-red-500" : ""
       
-      daysInTheMonth.push(<td key={i} data-date={i} data-month={props.selectedMonth} data-year={props.selectedYear} className={` rounded-full ${classToAdd}`} onClick = {e => {
+      daysInTheMonth.push(<td key={i} data-date={i} data-month={props.selectedMonth} data-year={props.selectedYear} className={` rounded-full w-1/6 p-1 ${classToAdd}`} onClick = {e => {
         {onDateSelect(e)}
       }}>{i}</td>)
     }
@@ -52,44 +52,23 @@ function DateSelect(props: DateSelectProps){
     var blankDays: Array<any> = [];
 
     for (let i: number = 0; i < parseInt(props.firstDayOfTheMonth.$W); i++) {
-      blankDays.push(<td>{""}</td>);
+      blankDays.push(<td className="w-1/6 p-1">{" "}</td>);
     }
 
     var totalSlots: Array<any> = [...blankDays, ...daysInTheMonth];
-    // var cells: Array<any> = [];
-    // var rows: Array<any> = [];
-
-    // totalSlots.forEach((row, i) => {
-    //   if (i % 7 !== 0) {
-    //     cells.push(row);
-    //   } else {
-    //     rows.push(cells);
-    //     cells = [];
-    //     cells.push(row);
-    //   }
-    //   if (i === totalSlots.length - 1) {
-    //     rows.push(cells);
-    //   }
-    // });
-
-    // let elements: Array<any> = []
-
-    // elements = rows.map((d: any) => {
-    //   return <tr>{d}</tr>;
-    // });
     return helpers.formatElementsForTable(totalSlots, 7);
   }
 
   return(
-    <table className="table-auto w-1/5 text-center shadow-lg">
-        <thead className="bg-red-200">
-          <tr>
-            {renderWeekNames()}
-          </tr>
-        </thead>
-        <tbody>
-          {renderDates()}
-        </tbody>
+    <table className="table-auto w-full text-center shadow-lg">
+      <thead className="flex w-full bg-red-200">
+        <tr className="flex justify-center w-full">
+          {renderWeekNames()}
+        </tr>
+      </thead>
+      <tbody className="flex flex-col items-center justify-between h-52 w-full">
+        {renderDates()}
+      </tbody>
     </table>
   )
 }

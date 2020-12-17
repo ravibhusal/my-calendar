@@ -1,9 +1,11 @@
+import React from 'react'
+
 const helpers = {
-  formatElementsForTable: function(list: Array<Element>, numberOfElementsInARow: number){
+  formatElementsForTable: function(list: Array<Element>, numberOfElementsInARow: number): Array<Element>{
     var cells: Array<any> = [];
     var rows: Array<any> = [];
   
-    list.forEach((row, i) => {
+    list.forEach((row: Element, i: number) => {
       if (i % numberOfElementsInARow !== 0) {
         cells.push(row);
       } else {
@@ -18,8 +20,8 @@ const helpers = {
   
     let elements: Array<any> = []
   
-    elements = rows.map((d: any) => {
-      return <tr>{d}</tr>;
+    elements = rows.map((d: Element) => {
+      return <tr className="flex w-full">{d}</tr>;
     });
 
     return elements;

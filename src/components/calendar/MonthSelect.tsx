@@ -28,13 +28,13 @@ function MonthSelect(props: MonthSelectProps){
   }
 
   return(
-    <table className="table-auto w-1/5 text-center shadow-lg">
-      <thead className="bg-red-200">
-        <th></th>
-        <th>Month</th>
-        <th></th>
+    <table className="table-fixed w-full text-center shadow-lg">
+      <thead className="flex w-full bg-red-200">
+        <tr className="flex justify-center w-full">
+          <th>Month</th>
+        </tr>
       </thead>
-      <tbody>{renderMonths()}</tbody>
+      <tbody className="flex flex-col items-center justify-between h-52 w-full">{renderMonths()}</tbody>
     </table>
   )
 }

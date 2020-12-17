@@ -97,8 +97,8 @@ function Calendar(props: CalendaProps){
   }  
 
   return(
-    <div>  
-      <div className="flex justify-center w-1/5 p-1">
+    <div className="flex flex-col">  
+      <div className="flex justify-center w-full p-1">
         <button className="p-1.5 shadow-lg" onClick={e => {
           toggleShowMonths(!showMonths)
           }}>{selectedMonthAbbr}
