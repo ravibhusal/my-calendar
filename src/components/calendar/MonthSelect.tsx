@@ -34,7 +34,7 @@ function MonthSelect(props: MonthSelectProps){
           <th>Month</th>
         </tr>
       </thead>
-      <tbody className="flex flex-col items-center justify-between h-52 w-full">{renderMonths()}</tbody>
+      <tbody className="flex flex-col items-center justify-between h-52 pb-4 px-2 w-full">{renderMonths()}</tbody>
     </table>
   )
 }
