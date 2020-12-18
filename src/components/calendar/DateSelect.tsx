@@ -29,7 +29,7 @@ function DateSelect(props: DateSelectProps): JSX.Element{
   const renderWeekNames = () =>{
     var weekNames: Array<any> = [];
     weekNames = weekdaysShortName.map(day => {
-      return <th className="w-10 p-1 font-normal">{day}</th>;
+      return <th className="w-10 p-1 font-medium text-xs text-gray-400 ">{day}</th>;
     })
     return weekNames;
   }
@@ -69,7 +69,7 @@ function DateSelect(props: DateSelectProps): JSX.Element{
         </tr>
       </thead>
       <hr/>
-      <tbody className="flex flex-col items-center justify-between h-52 w-full">
+      <tbody className="flex flex-col items-center justify-between h-52 w-full pt-1">
         {renderDates()}
       </tbody>
     </table>
