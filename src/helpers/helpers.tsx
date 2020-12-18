@@ -21,7 +21,7 @@ const helpers = {
     let elements: Array<any> = []
   
     elements = rows.map((d: Element) => {
-      return <tr className="flex w-full">{d}</tr>;
+      return <tr className="flex justify-between w-full">{d}</tr>;
     });
 
     return elements;
