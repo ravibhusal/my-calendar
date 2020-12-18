@@ -98,13 +98,13 @@ function Calendar(props: CalendaProps): JSX.Element{
 
   return(
     <div className="flex flex-col">  
-      <div className="flex justify-center w-full p-1">
-        <button className="p-1.5 shadow-lg" onClick={e => {
+      <div className="flex shadow-lg justify-center w-full p-1">
+        <button className="p-1.5" onClick={e => {
           toggleShowMonths(!showMonths)
           }}>{selectedMonthAbbr}
           </button>
           
-        <button className="p-1.5 shadow-lg border-red-250" onClick={e => {
+        <button className="p-1.5" onClick={e => {
           toggleShowYears(!showYears)
           }}>{selectedYear}
           </button>

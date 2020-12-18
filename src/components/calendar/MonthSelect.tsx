@@ -24,18 +24,25 @@ function MonthSelect(props: MonthSelectProps): JSX.Element{
   })
 
   const renderMonths = () => {
-    return helpers.formatElementsForTable(monthList, 3);
+    var rows: Array<any> = helpers.formatElementsForTable(monthList, 3);
+  
+    let elements: Array<any> = [];
+    elements = rows.map((d: Element) => {
+      return <tr className={`flex justify-between w-full`}>{d}</tr>;
+    });
+
+    return elements;
   }
 
   return(
-    <table className="table-auto w-full text-center shadow-lg">
+    <table className="table-fixed w-full text-center shadow-lg">
       <thead className="flex w-full bg-white">
         <tr className="flex justify-center w-full">
           <th className="p-1 font-medium text-xs text-gray-400">Select a Month</th>
         </tr>
       </thead>
       <hr/>
-      <tbody className="flex flex-col items-center justify-between h-52 pb-0.5 px-2 w-full">{renderMonths()}</tbody>
+      <tbody className="flex flex-col items-center h-52 pt-3 px-2 w-full">{renderMonths()}</tbody>
     </table>
   )
 }

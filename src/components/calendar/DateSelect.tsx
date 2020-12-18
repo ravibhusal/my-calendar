@@ -54,22 +54,30 @@ function DateSelect(props: DateSelectProps): JSX.Element{
     // TODO: Find the correct api for the first day of the month in dayjs library and fix
     // firstDayOfTheMonth.$W. startOf('month').format("W") apparently doesn't work.
     for (let i: number = 0; i < parseInt(props.firstDayOfTheMonth.$W); i++) {
-      blankDays.push(<td className="w-1/6 p-1">{" "}</td>);
+      blankDays.push(<td className="w-10">{" "}</td>);
     }
 
     var totalSlots: Array<any> = [...blankDays, ...daysInTheMonth];
-    return helpers.formatElementsForTable(totalSlots, 7);
+
+    let rows: Array<any> = helpers.formatElementsForTable(totalSlots, 7);
+  
+    let elements: Array<any> = [];
+    elements = rows.map((d: Element) => {
+      return <tr className={`flex w-full`}>{d}</tr>;
+    });
+
+    return elements;
   }
 
   return(
-    <table className="table-auto w-full text-center shadow-lg">
+    <table className="table-fixed w-full text-center shadow-lg">
       <thead className="flex w-full bg-white">
         <tr className="flex justify-center w-full">
           {renderWeekNames()}
         </tr>
       </thead>
       <hr/>
-      <tbody className="flex flex-col items-center justify-between h-52 w-full pt-1">
+      <tbody className="flex flex-col items-center justify-between h-64 w-full pt-1 pl-1">
         {renderDates()}
       </tbody>
     </table>
